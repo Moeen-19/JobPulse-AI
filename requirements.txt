@@ -1,0 +1,35 @@
+# ====================================
+# ⚙️ JobPulse Project Requirements
+# ====================================
+
+# --- API Dependencies ---
+fastapi==0.95.1
+uvicorn==0.22.0
+sqlalchemy==2.0.12
+pydantic==1.10.7
+psycopg2-binary==2.9.6
+python-dotenv==1.0.0
+
+# --- Data Processing & Forecasting ---
+pandas==2.0.1
+numpy==1.24.3
+scikit-learn==1.2.2
+prophet==1.1.2                # For skill growth forecasting
+
+# --- NLP & Scraping ---
+spacy==3.5.2
+nltk==3.8.1
+beautifulsoup4==4.12.2
+lxml==4.9.2                   # Parser backend for BeautifulSoup
+requests==2.30.0
+python-dateutil==2.8.2
+
+# --- Workflow Orchestration (ETL) ---
+apache-airflow==2.6.0
+
+# --- Dashboard / Visualization ---
+streamlit==1.22.0
+plotly==5.14.1
+
+# --- Database ---
+postgreSQL==1.0.0
