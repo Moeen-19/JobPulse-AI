@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Analysis - Forecast the Future of Work</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="market-analysis.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Fallback for Chart.js
+        window.addEventListener('load', function() {
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js failed to load from CDN');
+                // Try alternative CDN
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.js';
+                document.head.appendChild(script);
+            }
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="logo-box">
+                    <span class="logo-text">Job Market<br>Intelligence Platform</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="job-discovery.html">Job Discovery</a></li>
+                <li><a href="market-analysis.html" class="active">Market Analysis</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+            <button class="btn-auth">Login/Signup</button>
+        </div>
+    </nav>
+
+    <!-- Analysis Header -->
+    <section class="analysis-header">
+        <div class="container">
+            <h1 class="page-title">Forecast the Future of Work</h1>
+            <p class="page-subtitle">Data-driven insights powered by Prophet ML and correlation modeling</p>
+        </div>
+    </section>
+
+    <!-- Skill Growth Forecast Section -->
+    <section class="forecast-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">📅 Skill Growth Forecast</h2>
+                    <p class="section-description">Visualize demand trends for skills over the past and next 6 months using Prophet AI</p>
+                </div>
+                <div class="skill-selector">
+                    <label>Select Skill:</label>
+                    <select id="skill-select" class="analysis-select">
+                        <option value="python">Python</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="react">React</option>
+                        <option value="ai-engineer">AI Engineer</option>
+                        <option value="devops">DevOps</option>
+                        <option value="aws">AWS</option>
+                        <option value="data-science">Data Science</option>
+                        <option value="machine-learning">Machine Learning</option>
+                    </select>
+                    <button id="forecast-btn" class="btn-primary btn-small">Generate Forecast</button>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="forecast-chart" width="800" height="400"></canvas>
+                <div class="chart-legend-custom">
+                    <div class="legend-item">
+                        <span class="legend-line historical"></span>
+                        <span>Historical Data</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-line forecast"></span>
+                        <span>Forecast (Prophet AI)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-area confidence"></span>
+                        <span>Confidence Interval</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="forecast-stats">
+                <div class="stat-box">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-content">
+                        <span class="stat-label">Projected Growth</span>
+                        <span class="stat-value" id="growth-rate">+24%</span>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <span class="stat-label">Current Demand</span>
+                        <span class="stat-value" id="current-demand">1,245 jobs</span>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">🔮</div>
+                    <div class="stat-content">
+                        <span class="stat-label">6-Month Forecast</span>
+                        <span class="stat-value" id="forecast-demand">1,544 jobs</span>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-content">
+                        <span class="stat-label">Trend</span>
+                        <span class="stat-value trend-up" id="trend-indicator">Strong Upward</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regional Comparison Heatmap -->
+    <section class="heatmap-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">🌍 Regional Comparison Heatmap</h2>
+                    <p class="section-description">Compare skill demand growth across different regions</p>
+                </div>
+                <div class="region-selector">
+                    <label>Compare Skill:</label>
+                    <select id="heatmap-skill-select" class="analysis-select">
+                        <option value="data-science">Data Science</option>
+                        <option value="python">Python</option>
+                        <option value="react">React</option>
+                        <option value="devops">DevOps</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="heatmap-grid">
+                <div class="heatmap-row header-row">
+                    <div class="heatmap-cell header"></div>
+                    <div class="heatmap-cell header">Q4 2024</div>
+                    <div class="heatmap-cell header">Q1 2025</div>
+                    <div class="heatmap-cell header">Q2 2025 (Forecast)</div>
+                    <div class="heatmap-cell header">Growth %</div>
+                </div>
+                
+                <div class="heatmap-row" data-region="usa">
+                    <div class="heatmap-cell region-label">🇺🇸 USA</div>
+                    <div class="heatmap-cell" data-value="85">
+                        <span class="cell-value">1,245</span>
+                    </div>
+                    <div class="heatmap-cell" data-value="92">
+                        <span class="cell-value">1,380</span>
+                    </div>
+                    <div class="heatmap-cell forecast" data-value="98">
+                        <span class="cell-value">1,544</span>
+                    </div>
+                    <div class="heatmap-cell growth positive">
+                        <span class="growth-value">+24%</span>
+                    </div>
+                </div>
+
+                <div class="heatmap-row" data-region="india">
+                    <div class="heatmap-cell region-label">🇮🇳 India</div>
+                    <div class="heatmap-cell" data-value="78">
+                        <span class="cell-value">892</span>
+                    </div>
+                    <div class="heatmap-cell" data-value="88">
+                        <span class="cell-value">1,045</span>
+                    </div>
+                    <div class="heatmap-cell forecast" data-value="95">
+                        <span class="cell-value">1,234</span>
+                    </div>
+                    <div class="heatmap-cell growth positive">
+                        <span class="growth-value">+38%</span>
+                    </div>
+                </div>
+
+                <div class="heatmap-row" data-region="uk">
+                    <div class="heatmap-cell region-label">🇬🇧 UK</div>
+                    <div class="heatmap-cell" data-value="72">
+                        <span class="cell-value">567</span>
+                    </div>
+                    <div class="heatmap-cell" data-value="75">
+                        <span class="cell-value">612</span>
+                    </div>
+                    <div class="heatmap-cell forecast" data-value="80">
+                        <span class="cell-value">678</span>
+                    </div>
+                    <div class="heatmap-cell growth positive">
+                        <span class="growth-value">+20%</span>
+                    </div>
+                </div>
+
+                <div class="heatmap-row" data-region="germany">
+                    <div class="heatmap-cell region-label">🇩🇪 Germany</div>
+                    <div class="heatmap-cell" data-value="68">
+                        <span class="cell-value">445</span>
+                    </div>
+                    <div class="heatmap-cell" data-value="70">
+                        <span class="cell-value">478</span>
+                    </div>
+                    <div class="heatmap-cell forecast" data-value="73">
+                        <span class="cell-value">512</span>
+                    </div>
+                    <div class="heatmap-cell growth positive">
+                        <span class="growth-value">+15%</span>
+                    </div>
+                </div>
+
+                <div class="heatmap-row" data-region="canada">
+                    <div class="heatmap-cell region-label">🇨🇦 Canada</div>
+                    <div class="heatmap-cell" data-value="65">
+                        <span class="cell-value">389</span>
+                    </div>
+                    <div class="heatmap-cell" data-value="68">
+                        <span class="cell-value">423</span>
+                    </div>
+                    <div class="heatmap-cell forecast" data-value="72">
+                        <span class="cell-value">467</span>
+                    </div>
+                    <div class="heatmap-cell growth positive">
+                        <span class="growth-value">+20%</span>
+                    </div>
+                </div>
+
+                <div class="heatmap-row" data-region="australia">
+                    <div class="heatmap-cell region-label">🇦🇺 Australia</div>
+                    <div class="heatmap-cell" data-value="60">
+                        <span class="cell-value">312</span>
+                    </div>
+                    <div class="heatmap-cell" data-value="62">
+                        <span class="cell-value">334</span>
+                    </div>
+                    <div class="heatmap-cell forecast" data-value="65">
+                        <span class="cell-value">356</span>
+                    </div>
+                    <div class="heatmap-cell growth positive">
+                        <span class="growth-value">+14%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="heatmap-legend">
+                <span>Job Demand Intensity:</span>
+                <div class="gradient-bar">
+                    <span>Low</span>
+                    <div class="gradient"></div>
+                    <span>High</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skill Correlation Graph -->
+    <section class="correlation-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">🧠 Skill Correlation Network</h2>
+                    <p class="section-description">Discover interconnected skills and their relationships in job postings</p>
+                </div>
+                <button id="refresh-correlation" class="btn-secondary btn-small">Refresh Network</button>
+            </div>
+
+            <div class="correlation-container">
+                <div class="correlation-canvas">
+                    <svg id="correlation-graph" viewBox="0 0 1200 700">
+                        <!-- Central hub -->
+                        <g class="correlation-node central" data-skill="Python">
+                            <circle cx="600" cy="350" r="60" fill="var(--accent-green)"/>
+                            <text x="600" y="355" class="node-label-large">Python</text>
+                        </g>
+
+                        <!-- First ring -->
+                        <g class="correlation-node" data-skill="Machine Learning">
+                            <line x1="600" y1="350" x2="450" y2="200" class="correlation-edge" stroke-width="4"/>
+                            <circle cx="450" cy="200" r="45" fill="var(--accent-blue)"/>
+                            <text x="450" y="205" class="node-label">ML</text>
+                        </g>
+
+                        <g class="correlation-node" data-skill="Data Science">
+                            <line x1="600" y1="350" x2="750" y2="200" class="correlation-edge" stroke-width="5"/>
+                            <circle cx="750" cy="200" r="50" fill="var(--accent-blue)"/>
+                            <text x="750" y="205" class="node-label">Data Sci</text>
+                        </g>
+
+                        <g class="correlation-node" data-skill="Django">
+                            <line x1="600" y1="350" x2="850" y2="400" class="correlation-edge" stroke-width="3"/>
+                            <circle cx="850" cy="400" r="40" fill="#ff6b6b"/>
+                            <text x="850" y="405" class="node-label">Django</text>
+                        </g>
+
+                        <g class="correlation-node" data-skill="Flask">
+                            <line x1="600" y1="350" x2="750" y2="520" class="correlation-edge" stroke-width="3"/>
+                            <circle cx="750" cy="520" r="38" fill="#ff6b6b"/>
+                            <text x="750" y="525" class="node-label">Flask</text>
+                        </g>
+
+                        <g class="correlation-node" data-skill="Pandas">
+                            <line x1="600" y1="350" x2="450" y2="520" class="correlation-edge" stroke-width="4"/>
+                            <circle cx="450" cy="520" r="42" fill="#ffd93d"/>
+                            <text x="450" y="525" class="node-label">Pandas</text>
+                        </g>
+
+                        <g class="correlation-node" data-skill="NumPy">
+                            <line x1="600" y1="350" x2="350" y2="400" class="correlation-edge" stroke-width="4"/>
+                            <circle cx="350" cy="400" r="42" fill="#ffd93d"/>
+                            <text x="350" y="405" class="node-label">NumPy</text>
+                        </g>
+
+                        <!-- Second ring connections -->
+                        <g class="correlation-node" data-skill="TensorFlow">
+                            <line x1="450" y1="200" x2="300" y2="150" class="correlation-edge secondary" stroke-width="2"/>
+                            <circle cx="300" cy="150" r="35" fill="#a78bfa"/>
+                            <text x="300" y="155" class="node-label-small">TF</text>
+                        </g>
+
+                        <g class="correlation-node" data-skill="PyTorch">
+                            <line x1="450" y1="200" x2="400" y2="80" class="correlation-edge secondary" stroke-width="2"/>
+                            <circle cx="400" cy="80" r="35" fill="#a78bfa"/>
+                            <text x="400" y="85" class="node-label-small">PyTorch</text>
+                        </g>
+
+                        <g class="correlation-node" data-skill="NLP">
+                            <line x1="750" y1="200" x2="900" y2="120" class="correlation-edge secondary" stroke-width="2"/>
+                            <circle cx="900" cy="120" r="35" fill="#a78bfa"/>
+                            <text x="900" y="125" class="node-label-small">NLP</text>
+                        </g>
+
+                        <g class="correlation-node" data-skill="SQL">
+                            <line x1="750" y1="200" x2="850" y2="250" class="correlation-edge secondary" stroke-width="2"/>
+                            <circle cx="850" cy="250" r="35" fill="#6ee7b7"/>
+                            <text x="850" y="255" class="node-label-small">SQL</text>
+                        </g>
+
+                        <!-- Cross connections -->
+                        <line x1="450" y1="200" x2="750" y2="200" class="correlation-edge tertiary" stroke-width="1.5" opacity="0.3"/>
+                        <line x1="450" y1="520" x2="750" y2="520" class="correlation-edge tertiary" stroke-width="1.5" opacity="0.3"/>
+                    </svg>
+                </div>
+
+                <div class="correlation-info">
+                    <h4>Network Insights</h4>
+                    <div class="info-item">
+                        <span class="info-label">Total Skills:</span>
+                        <span class="info-value">15</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Connections:</span>
+                        <span class="info-value">24</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Strongest Pair:</span>
+                        <span class="info-value">Python + Data Science</span>
+                    </div>
+                    
+                    <div class="correlation-legend">
+                        <h5>Edge Thickness = Co-occurrence Frequency</h5>
+                        <div class="legend-item">
+                            <span class="legend-circle" style="background: var(--accent-green);"></span>
+                            <span>Central Skill</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-circle" style="background: var(--accent-blue);"></span>
+                            <span>Core Related</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-circle" style="background: #ff6b6b;"></span>
+                            <span>Frameworks</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-circle" style="background: #ffd93d;"></span>
+                            <span>Libraries</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-circle" style="background: #a78bfa;"></span>
+                            <span>Specialized</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Salary vs Demand Scatter Plot -->
+    <section class="scatter-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">💸 Salary & Demand Relationship</h2>
+                    <p class="section-description">Discover overvalued and undervalued skills in the market</p>
+                </div>
+                <div class="scatter-controls">
+                    <label>
+                        <input type="checkbox" id="show-labels" checked> Show Labels
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-quadrants" checked> Show Quadrants
+                    </label>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="scatter-chart" width="800" height="400"></canvas>
+            </div>
+
+            <div class="quadrant-explanation">
+                <div class="quadrant-box high-demand-high-salary">
+                    <h4>🌟 High Demand, High Salary</h4>
+                    <p>Premium skills with strong market value</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AI/ML</span>
+                        <span class="skill-tag">Cloud Architecture</span>
+                        <span class="skill-tag">Blockchain</span>
+                    </div>
+                </div>
+                <div class="quadrant-box high-demand-low-salary">
+                    <h4>⚠️ High Demand, Lower Salary</h4>
+                    <p>Undervalued skills - opportunity for negotiation</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                    </div>
+                </div>
+                <div class="quadrant-box low-demand-high-salary">
+                    <h4>💎 Lower Demand, High Salary</h4>
+                    <p>Niche specializations with premium pay</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Rust</span>
+                        <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">Quantum Computing</span>
+                    </div>
+                </div>
+                <div class="quadrant-box low-demand-low-salary">
+                    <h4>📉 Lower Demand, Lower Salary</h4>
+                    <p>Declining or saturated skills</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">jQuery</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">Flash</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Source Info -->
+    <section class="data-info-section">
+        <div class="container">
+            <div class="data-info-card">
+                <div class="info-icon">🤖</div>
+                <div class="info-content">
+                    <h3>Powered by Advanced ML Models</h3>
+                    <p>Our forecasts use Facebook Prophet for time-series prediction and correlation analysis based on 400+ job postings across multiple platforms. Data is updated daily from Naukri, RemoteOK, WeWorkRemotely, and Y Combinator.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="api-client.js"></script>
+    <script src="script.js"></script>
+    <script src="market-analysis.js"></script>
+</body>
+</html>

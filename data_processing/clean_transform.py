@@ -297,6 +297,7 @@ class JobDataProcessor:
         # Extract currency
         currency_map = {
             '$': 'USD',
+            $': 'USD',
             '£': 'GBP',
             '€': 'EUR',
             '¥': 'JPY',

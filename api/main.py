@@ -5,8 +5,7 @@ from typing import List, Optional
 from datetime import date, timedelta
 from api.database import get_db, engine
 from api import models, schemas, crud
-from api.ml.forecasting import get_skill_growth_forecast
-from api.ml.correlation import compute_skill_correlations
+# ML imports moved to endpoint functions to avoid circular imports
 import dotenv
 
 # Load environment variables from .env file
@@ -280,11 +279,15 @@ async def get_job_growth(
 
 @app.get("/ml/skill-forecast", tags=["ML Insights"])
 async def skill_forecast(skill: str, region: Optional[str] = None, days_ahead: int = 30, db: Session = Depends(get_db)):
-    return get_skill_growth_forecast(db, skill, region, days_ahead)
+    """Get skill demand forecast using Prophet ML model"""
+    from api.ml.forecasting import run_forecast
+    return run_forecast(db, skill, region, days_ahead)
 
 @app.get("/ml/skill-correlations", tags=["ML Insights"])
 async def skill_correlations(region: Optional[str] = None, top_n: int = 20, db: Session = Depends(get_db)):
-    return compute_skill_correlations(db, region, top_n)
+    """Get skill correlation analysis based on co-occurrence in job postings"""
+    from api.ml.correlation import run_correlation
+    return run_correlation(db, region, top_n)
 
 @app.get("/search", response_model=schemas.SearchResults, tags=["Search"])
 async def search(

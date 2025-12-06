@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional, Dict, Any
 from datetime import date, datetime
 
@@ -9,15 +9,13 @@ class SkillBase(BaseModel):
 class Skill(SkillBase):
     id: int
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class SkillDetail(Skill):
     job_count: int = 0
     avg_salary: Optional[float] = None
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class LocationBase(BaseModel):
     city: Optional[str] = None
@@ -28,8 +26,7 @@ class LocationBase(BaseModel):
 class Location(LocationBase):
     id: int
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class CompanyBase(BaseModel):
     name: str
@@ -39,14 +36,12 @@ class CompanyBase(BaseModel):
 class Company(CompanyBase):
     id: int
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class CompanyDetail(Company):
     job_count: int = 0
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class JobBase(BaseModel):
     title: str
@@ -64,14 +59,12 @@ class Job(JobBase):
     company: Company
     location: Optional[Location] = None
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class JobDetail(Job):
     skills: List[Skill] = []
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class TrendingSkill(BaseModel):
     skill: Skill
@@ -79,8 +72,7 @@ class TrendingSkill(BaseModel):
     avg_salary: Optional[float] = None
     growth_rate: Optional[float] = None  # Percentage growth over the period
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class SalaryInsight(BaseModel):
     title: str
@@ -91,8 +83,7 @@ class SalaryInsight(BaseModel):
     period: str = "year"
     job_count: int
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class JobGrowthPoint(BaseModel):
     date: date
@@ -102,8 +93,7 @@ class JobGrowthInsight(BaseModel):
     skill: Optional[str] = None
     data_points: List[JobGrowthPoint]
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class SearchResult(BaseModel):
     type: str  # "job", "company", "skill"
@@ -111,13 +101,11 @@ class SearchResult(BaseModel):
     title: str
     description: Optional[str] = None
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class SearchResults(BaseModel):
     jobs: List[Job] = []
     companies: List[Company] = []
     skills: List[Skill] = []
     
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

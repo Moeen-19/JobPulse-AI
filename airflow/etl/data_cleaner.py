@@ -8,29 +8,31 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("etl.data_cleaner")
 
 
-def clean_job_data(data_dir: str) -> str:
+def clean_job_data(input_dir: str, output_path: str) -> str:
     """
     Combine, clean, and transform raw job data from multiple job boards.
 
     Args:
-        data_dir (str): Path to directory containing raw job CSV files.
+        input_dir (str): Path to directory containing raw job CSV files.
+        output_path (str): Path where cleaned CSV should be saved.
 
     Returns:
         str: Path to the final cleaned CSV file.
     """
-    logger.info(f"Starting job data cleaning from directory: {data_dir}")
+    logger.info(f"Starting job data cleaning from directory: {input_dir}")
 
     # Define expected input CSV files (produced by scrapers)
+    # These match the actual output filenames from scrapers
     input_files = [
-        "data/processed/remoteok_jobs.csv",
-        "data/processed/weworkremotely_jobs.csv",
-        "data/processed/y_combinator_jobs.csv",
-        "data/processed/naukri_jobs.csv"
+        "remoteok_raw.csv",
+        "weworkremotely_raw.csv",
+        "y_combinator_raw.csv",
+        "naukri_raw.csv"
     ]
 
     all_dfs = []
     for file_name in input_files:
-        file_path = os.path.join(data_dir, file_name)
+        file_path = os.path.join(input_dir, file_name)
         if os.path.exists(file_path):
             try:
                 logger.info(f"Reading {file_path}")
@@ -54,8 +56,7 @@ def clean_job_data(data_dir: str) -> str:
     df_cleaned = processor.process_jobs(combined_df)
 
     # Ensure output directory exists
-    os.makedirs(data_dir, exist_ok=True)
-    output_path = os.path.join(data_dir, "jobs_processed.csv")
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     df_cleaned.to_csv(output_path, index=False)
     logger.info(f"✅ Processed {len(df_cleaned)} jobs → {output_path}")
