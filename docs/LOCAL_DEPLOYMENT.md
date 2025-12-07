@@ -8,7 +8,17 @@
 
 ---
 
-## 🎯 Quick Start (3 Steps)
+## 🎯 Start the Application:
+
+### 🎯 Automatic Start (2 Steps)
+
+Open a **NEW PowerShell/Terminal window** and run:
+```powershell
+quickstart.bat # for Windows
+./quickstart.sh # for Linux/MacOS  
+```
+
+### 🎯 Manunal Start (3 Steps)
 
 ### Step 1: Start the API Server
 
@@ -179,13 +189,3 @@ python test_integration.py
 ```
 
 ---
-
-## ✨ You're All Set!
-
-Your JobPulse application should now be running with:
-- ✅ Backend API on port 8000
-- ✅ Frontend website on port 3000
-- ✅ Database with sample data
-- ✅ Full integration working
-
-**Enjoy exploring your job market analytics platform! 🎉**

@@ -42,6 +42,16 @@ if not exist ".env" (
     echo Created .env file
 )
 
+Write-Host "# Generate Sample Data"
+$response = Read-Host "Would you like to generate sample data for testing? (y/n)"
+
+if ($response -eq "y") {
+    Write-Host "📊 Generating sample data..."
+    python generate_sample_data.py | Out-Null
+}
+else if ($response -eq "n") {
+    Write-Host "⏭️ Skipping sample data generation."
+}
 echo.
 echo ======================================
 echo Setup Complete!
@@ -58,8 +68,6 @@ echo.
 echo 3. Apply schema:
 echo    psql -U airflow -d jobpulse_db -f warehouse\schema.sql
 echo.
-echo 4. Generate sample data:
-echo    python generate_sample_data.py
 echo.
 echo 5. Start the API server:
 echo    uvicorn api.main:app --reload
