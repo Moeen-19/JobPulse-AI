@@ -1,0 +1,7 @@
+# Ignore folders
+venv/
+__pycache__/
+
+# Ignore specific files
+.env
+archytask.md
