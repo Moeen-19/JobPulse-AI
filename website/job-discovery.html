@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Discovery - Explore the Market Your Way</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="job-discovery.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="logo-box">
+                    <span class="logo-text">Job Market<br>Intelligence Platform</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="job-discovery.html" class="active">Job Discovery</a></li>
+                <li><a href="market-analysis.html">Market Analysis</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+            <button class="btn-auth">Login/Signup</button>
+        </div>
+    </nav>
+
+    <!-- Discovery Header -->
+    <section class="discovery-header">
+        <div class="container">
+            <h1 class="page-title">Explore the Market Your Way</h1>
+            <p class="page-subtitle">You're not searching jobs. You're exploring connections between jobs, skills, and regions.</p>
+            
+            <!-- View Toggle -->
+            <div class="view-toggle">
+                <button class="toggle-btn active" data-view="map">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/>
+                    </svg>
+                    Map View
+                </button>
+                <button class="toggle-btn" data-view="graph">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <circle cx="6" cy="6" r="2"/>
+                        <circle cx="18" cy="6" r="2"/>
+                        <circle cx="6" cy="18" r="2"/>
+                        <circle cx="18" cy="18" r="2"/>
+                        <line x1="8" y1="7" x2="10" y2="10"/>
+                        <line x1="16" y1="7" x2="14" y2="10"/>
+                        <line x1="8" y1="17" x2="10" y2="14"/>
+                        <line x1="16" y1="17" x2="14" y2="14"/>
+                    </svg>
+                    Graph View
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Discovery Interface -->
+    <section class="discovery-interface">
+        <!-- Sidebar Panel -->
+        <aside class="insights-panel">
+            <div class="panel-header">
+                <h3>Dynamic Insights</h3>
+                <button class="panel-collapse">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="panel-section">
+                <h4>Filters</h4>
+                <div class="filter-group">
+                    <label>Search Skills</label>
+                    <input type="text" class="filter-input" placeholder="e.g., Python, React, AWS">
+                </div>
+                <div class="filter-group">
+                    <label>Role Type</label>
+                    <select class="filter-select">
+                        <option>All Roles</option>
+                        <option>Software Engineer</option>
+                        <option>Data Scientist</option>
+                        <option>Product Manager</option>
+                        <option>Designer</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Salary Range</label>
+                    <div class="range-slider">
+                        <input type="range" min="0" max="200" value="50" class="slider">
+                        <div class="range-values">
+                            <span>$0k</span>
+                            <span>$200k+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regional Insights -->
+            <div class="panel-section">
+                <h4>Regional Top Skills</h4>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">Python</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                        <span class="skill-percent">85%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">JavaScript</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 78%"></div>
+                        </div>
+                        <span class="skill-percent">78%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">AWS</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 72%"></div>
+                        </div>
+                        <span class="skill-percent">72%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">React</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 68%"></div>
+                        </div>
+                        <span class="skill-percent">68%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Industry Trends -->
+            <div class="panel-section">
+                <h4>Industry Trends</h4>
+                <div class="trend-list">
+                    <div class="trend-item growing">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
+                        <span>AI/ML Engineering</span>
+                        <span class="trend-value">+24%</span>
+                    </div>
+                    <div class="trend-item growing">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
+                        <span>Cloud Architecture</span>
+                        <span class="trend-value">+18%</span>
+                    </div>
+                    <div class="trend-item declining">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>
+                            <polyline points="17 18 23 18 23 12"/>
+                        </svg>
+                        <span>Legacy Systems</span>
+                        <span class="trend-value">-8%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forecast Snapshot -->
+            <div class="panel-section">
+                <h4>Forecast Snapshot</h4>
+                <div class="forecast-card">
+                    <div class="forecast-header">
+                        <span>Next Quarter Prediction</span>
+                        <span class="forecast-badge">Prophet AI</span>
+                    </div>
+                    <div class="forecast-stat">
+                        <span class="forecast-number">+12%</span>
+                        <span class="forecast-label">Growth in Tech Sector</span>
+                    </div>
+                    <div class="forecast-detail">
+                        <p>Remote positions expected to increase by 15% in North America</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Local Companies -->
+            <div class="panel-section">
+                <h4>Companies Hiring</h4>
+                <div class="company-list">
+                    <div class="company-item">
+                        <div class="company-logo">G</div>
+                        <div class="company-info">
+                            <span class="company-name">Google</span>
+                            <span class="company-jobs">24 positions</span>
+                        </div>
+                    </div>
+                    <div class="company-item">
+                        <div class="company-logo">M</div>
+                        <div class="company-info">
+                            <span class="company-name">Microsoft</span>
+                            <span class="company-jobs">18 positions</span>
+                        </div>
+                    </div>
+                    <div class="company-item">
+                        <div class="company-logo">A</div>
+                        <div class="company-info">
+                            <span class="company-name">Amazon</span>
+                            <span class="company-jobs">32 positions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Visualization Area -->
+        <main class="visualization-area">
+            <!-- Map View -->
+            <div class="view-container active" id="map-view">
+                <div class="map-canvas">
+                    <svg class="world-map" viewBox="0 0 1000 600">
+                        <!-- Simplified world map regions -->
+                        <g class="regions">
+                            <!-- North America -->
+                            <circle class="region-marker high-density" cx="200" cy="180" r="40" data-region="North America">
+                                <title>North America - 1,245 jobs</title>
+                            </circle>
+                            <text x="200" y="185" class="region-label">North America</text>
+                            
+                            <!-- Europe -->
+                            <circle class="region-marker medium-density" cx="500" cy="150" r="35" data-region="Europe">
+                                <title>Europe - 892 jobs</title>
+                            </circle>
+                            <text x="500" y="155" class="region-label">Europe</text>
+                            
+                            <!-- Asia -->
+                            <circle class="region-marker high-density" cx="750" cy="220" r="45" data-region="Asia">
+                                <title>Asia - 1,567 jobs</title>
+                            </circle>
+                            <text x="750" y="225" class="region-label">Asia</text>
+                            
+                            <!-- South America -->
+                            <circle class="region-marker low-density" cx="300" cy="400" r="25" data-region="South America">
+                                <title>South America - 234 jobs</title>
+                            </circle>
+                            <text x="300" y="405" class="region-label">South America</text>
+                            
+                            <!-- Africa -->
+                            <circle class="region-marker low-density" cx="520" cy="350" r="28" data-region="Africa">
+                                <title>Africa - 312 jobs</title>
+                            </circle>
+                            <text x="520" y="355" class="region-label">Africa</text>
+                            
+                            <!-- Australia -->
+                            <circle class="region-marker medium-density" cx="850" cy="450" r="30" data-region="Australia">
+                                <title>Australia - 456 jobs</title>
+                            </circle>
+                            <text x="850" y="455" class="region-label">Australia</text>
+                        </g>
+                        
+                        <!-- Connection lines between regions -->
+                        <g class="connections" opacity="0.3">
+                            <line x1="200" y1="180" x2="500" y2="150" stroke="var(--accent-green)" stroke-width="1"/>
+                            <line x1="500" y1="150" x2="750" y2="220" stroke="var(--accent-green)" stroke-width="1"/>
+                            <line x1="200" y1="180" x2="750" y2="220" stroke="var(--accent-blue)" stroke-width="1"/>
+                        </g>
+                    </svg>
+                    
+                    <!-- Map Legend -->
+                    <div class="map-legend">
+                        <h5>Job Density</h5>
+                        <div class="legend-item">
+                            <span class="legend-dot high"></span>
+                            <span>High (1000+)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot medium"></span>
+                            <span>Medium (500-999)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot low"></span>
+                            <span>Low (&lt;500)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Region Detail Card (appears on hover/click) -->
+                <div class="region-detail-card" id="region-card" style="display: none;">
+                    <div class="card-header">
+                        <h4 id="region-name">North America</h4>
+                        <button class="card-close">×</button>
+                    </div>
+                    <div class="card-content">
+                        <div class="detail-stat">
+                            <span class="stat-label">Total Jobs</span>
+                            <span class="stat-value" id="region-jobs">1,245</span>
+                        </div>
+                        <div class="detail-stat">
+                            <span class="stat-label">Growth Rate</span>
+                            <span class="stat-value growth" id="region-growth">+15%</span>
+                        </div>
+                        <div class="top-roles">
+                            <h5>Top Roles</h5>
+                            <ul id="region-roles">
+                                <li>Software Engineer</li>
+                                <li>Data Scientist</li>
+                                <li>Product Manager</li>
+                            </ul>
+                        </div>
+                        <button class="btn-primary btn-small">Explore Jobs</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graph View -->
+            <div class="view-container" id="graph-view">
+                <div class="graph-canvas">
+                    <svg class="skill-graph" viewBox="0 0 1000 600">
+                        <!-- Central node -->
+                        <g class="node central-node" data-skill="Full Stack Development">
+                            <circle cx="500" cy="300" r="50" fill="var(--accent-green)"/>
+                            <text x="500" y="305" class="node-label">Full Stack</text>
+                        </g>
+                        
+                        <!-- Connected skill nodes -->
+                        <g class="node skill-node" data-skill="React">
+                            <circle cx="350" cy="200" r="35" fill="var(--accent-blue)"/>
+                            <text x="350" y="205" class="node-label">React</text>
+                            <line x1="500" y1="300" x2="350" y2="200" class="edge"/>
+                        </g>
+                        
+                        <g class="node skill-node" data-skill="Node.js">
+                            <circle cx="650" cy="200" r="35" fill="var(--accent-blue)"/>
+                            <text x="650" y="205" class="node-label">Node.js</text>
+                            <line x1="500" y1="300" x2="650" y2="200" class="edge"/>
+                        </g>
+                        
+                        <g class="node skill-node" data-skill="Python">
+                            <circle cx="350" cy="400" r="40" fill="var(--accent-blue)"/>
+                            <text x="350" y="405" class="node-label">Python</text>
+                            <line x1="500" y1="300" x2="350" y2="400" class="edge"/>
+                        </g>
+                        
+                        <g class="node skill-node" data-skill="AWS">
+                            <circle cx="650" cy="400" r="38" fill="var(--accent-blue)"/>
+                            <text x="650" y="405" class="node-label">AWS</text>
+                            <line x1="500" y1="300" x2="650" y2="400" class="edge"/>
+                        </g>
+                        
+                        <g class="node skill-node" data-skill="Docker">
+                            <circle cx="250" cy="300" r="30" fill="#ff6b6b"/>
+                            <text x="250" y="305" class="node-label">Docker</text>
+                            <line x1="500" y1="300" x2="250" y2="300" class="edge"/>
+                        </g>
+                        
+                        <g class="node skill-node" data-skill="MongoDB">
+                            <circle cx="750" cy="300" r="32" fill="#ff6b6b"/>
+                            <text x="750" y="305" class="node-label">MongoDB</text>
+                            <line x1="500" y1="300" x2="750" y2="300" class="edge"/>
+                        </g>
+                        
+                        <!-- Secondary connections -->
+                        <line x1="350" y1="200" x2="350" y2="400" class="edge secondary" opacity="0.3"/>
+                        <line x1="650" y1="200" x2="650" y2="400" class="edge secondary" opacity="0.3"/>
+                    </svg>
+                    
+                    <!-- Graph Legend -->
+                    <div class="graph-legend">
+                        <h5>Node Size = Relevance</h5>
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: var(--accent-green);"></span>
+                            <span>Selected Skill</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: var(--accent-blue);"></span>
+                            <span>Related Skills</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: #ff6b6b;"></span>
+                            <span>Tools & Tech</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Detail Card -->
+                <div class="skill-detail-card" id="skill-card" style="display: none;">
+                    <div class="card-header">
+                        <h4 id="skill-name">React</h4>
+                        <button class="card-close">×</button>
+                    </div>
+                    <div class="card-content">
+                        <div class="detail-stat">
+                            <span class="stat-label">Related Jobs</span>
+                            <span class="stat-value" id="skill-jobs">342</span>
+                        </div>
+                        <div class="detail-stat">
+                            <span class="stat-label">Avg Salary</span>
+                            <span class="stat-value" id="skill-salary">$125k</span>
+                        </div>
+                        <div class="related-skills">
+                            <h5>Often Paired With</h5>
+                            <div class="skill-tags" id="related-skills">
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">TypeScript</span>
+                                <span class="skill-tag">Redux</span>
+                            </div>
+                        </div>
+                        <button class="btn-primary btn-small">View Jobs</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Instructions -->
+            <div class="view-instructions">
+                <p><strong>Tip:</strong> <span id="instruction-text">Hover over regions to see job density. Click to explore detailed insights.</span></p>
+            </div>
+        </main>
+    </section>
+
+    <script src="api-client.js"></script>
+    <script src="script.js"></script>
+    <script src="job-discovery.js"></script>
+</body>
+</html>

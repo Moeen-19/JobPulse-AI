@@ -212,29 +212,85 @@ DB_PASSWORD=your_password
 
 ## 🚀 Getting Started
 
-### 1. Start the API server
+### Quick Start (Recommended)
+
+#### Linux/Mac:
 ```bash
-cd JobPulse
+chmod +x quickstart.sh
+./quickstart.sh
+```
+
+#### Windows:
+```cmd
+quickstart.bat
+```
+
+### Manual Setup
+
+#### 1. Install Dependencies
+```bash
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install packages
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+```
+
+#### 2. Setup Database
+```bash
+# Create database
+psql -U postgres -c "CREATE DATABASE jobpulse_db;"
+psql -U postgres -c "CREATE USER airflow WITH PASSWORD 'airflow_pass';"
+psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE jobpulse_db TO airflow;"
+
+# Apply schema
+psql -U airflow -d jobpulse_db -f warehouse/schema.sql
+
+# Generate sample data (optional)
+python generate_sample_data.py
+```
+
+#### 3. Start the API Server
+```bash
 uvicorn api.main:app --reload
 ```
-The API will be available at http://localhost:8000
+The API will be available at http://localhost:8000  
+API Documentation: http://localhost:8000/docs
 
-### 2. Start the Airflow scheduler
+#### 4. Start the Website
 ```bash
-# Start the scheduler
-airflow webserver --port 8080
-airflow scheduler
+cd website
+python -m http.server 3000
+```
+The website will be available at http://localhost:3000
+
+#### 5. Test Integration
+```bash
+python test_integration.py
 ```
 
-### 3. Run the data ingestion pipeline
+### Optional: Run Data Collection
+
+#### Option A: Run Scrapers Manually
 ```bash
-# Trigger the DAG manually
-airflow dags trigger job_ingestion_pipeline
+python -c "from scrapers.remoteok_scraper import scrape_remoteok; scrape_remoteok('data/remoteok_raw.csv')"
 ```
 
-### 4. Launch the dashboard
+#### Option B: Use Airflow
 ```bash
-cd JobPulse
+# Terminal 1: Start webserver
+cd airflow && airflow webserver --port 8080
+
+# Terminal 2: Start scheduler
+cd airflow && airflow scheduler
+
+# Access http://localhost:8080 and trigger 'job_ingestion_pipeline'
+```
+
+#### Option C: Launch the Dashboard
+```bash
 streamlit run dashboard/app.py
 ```
 The dashboard will be available at http://localhost:8501
